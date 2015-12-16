@@ -113,5 +113,9 @@ public class Skaiciavimai {
     {
         return kreditoMenesineImokaApskaiciavimas >= realiosMenesinesPajamos / 100 * 40;
     }
+    public boolean tikrinti_busto_duomenys ()
+    {
+        return vaikuSkaiciusSeimoje > 0 && vaikuSkaiciusSeimoje < 10 && seimosPajamosAtskaiciusMokescius > 0 && seimosPajamosAtskaiciusMokescius < 10000 && seimosFinansiniaiIsipareigojimai > 0 && seimosFinansiniaiIsipareigojimai < 5000 && paskolosSuma2 > 300 && paskolosSuma2 < 26000 && laikotarpis <= 5;
+    }
     
 }

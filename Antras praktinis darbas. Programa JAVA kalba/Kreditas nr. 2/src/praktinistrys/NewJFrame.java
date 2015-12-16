@@ -450,53 +450,37 @@ public class NewJFrame extends javax.swing.JFrame {
        
        klaidaTextField.setVisible(false);
      
-         double paskolosSuma;
-         double sutartiesSudarymoMokestisAtsakymas;
-         double  atsakymas1 = 0;
-         double atsakymas2 = 0;
-        
-         double paskolosSuma2;
-         double laikotarpis;
-         double bendrosGrazintinosSumosApskaiciavimasAtsakymas;
+         Skaiciavimai skaiciavimai = new Skaiciavimai ();
          
-         double kreditoMenesineImokaApskaiciavimas;
-          
-         double realiosMenesinesPajamos;
-         double seimosPajamosAtskaiciusMokescius;
-         double seimosFinansiniaiIsipareigojimai;
-         double vaikuSkaiciusSeimoje;
-         
-        paskolosSuma = Integer.parseInt(paskolosSumaTextField.getText());
+        skaiciavimai.setPaskolosSuma(Integer.parseInt(paskolosSumaTextField.getText()));
+       
+        skaiciavimai.setLaikotarpis(Integer.parseInt(laikotarpisTextField.getText()));
         
         
-        paskolosSuma2 =     Integer.parseInt(paskolosSumaTextField.getText());
-        laikotarpis = Integer.parseInt(laikotarpisTextField.getText());
-        
-        seimosPajamosAtskaiciusMokescius  =     Integer.parseInt(seimosPajamosAtskaiciusMokesciusTextField.getText());
-        seimosFinansiniaiIsipareigojimai =  Integer.parseInt(seimosFinansiniaiIsipareigojimaiTextField.getText());
-        vaikuSkaiciusSeimoje =  Integer.parseInt(vaikuSkaiciusSeimojeTextField.getText());
+         skaiciavimai.setSeimosFinansiniaiIsipareigojimai(Integer.parseInt(seimosFinansiniaiIsipareigojimaiTextField.getText()));
+         skaiciavimai.setVaikuSkaiciusSeimoje(Integer.parseInt(vaikuSkaiciusSeimojeTextField.getText()));
             
-        if (vaikuSkaiciusSeimoje > 0 && vaikuSkaiciusSeimoje < 10 && seimosPajamosAtskaiciusMokescius > 0 && seimosPajamosAtskaiciusMokescius < 10000 && seimosFinansiniaiIsipareigojimai > 0 && seimosFinansiniaiIsipareigojimai < 5000 && paskolosSuma2 > 300 && paskolosSuma2 < 26000 && laikotarpis <= 5){
+        if (skaiciavimai.tikrinti_busto_duomenys()){
                 
         // SUTARTIES SUDARYMO MOKESTIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \\
         
-            sutartiesSudarymoMokestisAtsakymas = paskolosSuma * 1 / 100;
+            skaiciavimai.setSutartiesSudarymoMokestisAtsakymas(skaiciavimai.getPaskolosSuma() * 1 / 100);
        
-             if (sutartiesSudarymoMokestisAtsakymas< 28.96){
-                atsakymas1 = 28.96;
-                sutartiesSudarymoMokescioDydisTextField.setText(atsakymas1 + "");
+             if (skaiciavimai.getSutartiesSudarymoMokestisAtsakymas()< 28.96){
+                skaiciavimai.setAtsakymas2(28.96);
+                sutartiesSudarymoMokescioDydisTextField.setText(skaiciavimai.getAtsakymas1() + "");
              }else{
-                atsakymas2= sutartiesSudarymoMokestisAtsakymas;
-                sutartiesSudarymoMokescioDydisTextField.setText(atsakymas2 + "");
+                skaiciavimai.setAtsakymas2(skaiciavimai.getSutartiesSudarymoMokestisAtsakymas());
+                sutartiesSudarymoMokescioDydisTextField.setText(skaiciavimai.getAtsakymas2() + "");
              } 
         
          // PABAIGA!!!!!!!!!!    SUTARTIES SUDARYMO MOKESTIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \\
          
          // BENDROS GRAZINTINOS SUMOS APSKAICIAVIMAS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \\
        
-           bendrosGrazintinosSumosApskaiciavimasAtsakymas = paskolosSuma2 + (paskolosSuma2 * 2 / 100 * laikotarpis );
+           skaiciavimai.setBendrosGrazintinosSumosApskaiciavimasAtsakymas(skaiciavimai.getPaskolosSuma2 () + (skaiciavimai.getPaskolosSuma2() * 2 / 100 * skaiciavimai.getLaikotarpis()));
            // SVARBU!!!!!!!! 2 siaip pasirinkau, nes nezinau palukanu normu;
-          if ( laikotarpis  > 5){
+          if (skaiciavimai.tikrinti_laikotarpi(5)){
                  // NEGALIMAAAAA
                  bendrosGrazintinosSUmosApskaiciavimasTextField.setText("Nesuteikiama paskola");
           }else{
@@ -505,15 +489,15 @@ public class NewJFrame extends javax.swing.JFrame {
                 
           // KREDITO MENESINES IMOKOS APSKAICIAVIMUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \\\\              
                       
-              kreditoMenesineImokaApskaiciavimas = bendrosGrazintinosSumosApskaiciavimasAtsakymas / laikotarpis / 12;           
-                  
+                      
+              skaiciavimai.setKreditoMenesineImokaApskaiciavimas(skaiciavimai.getBendrosGrazintinosSumosApskaiciavimasAtsakymas() / skaiciavimai.getLaikotarpis() / 12);
           //  PABAIGA!!!!!!!!!!!!!      KREDITO MENESINES IMOKOS APSKAICIAVIMUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\     
          
            //GALIMYBE GRAZINTI KREDITA NUSTATYMUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \\                              
                                
-            realiosMenesinesPajamos =     seimosPajamosAtskaiciusMokescius - seimosFinansiniaiIsipareigojimai - (vaikuSkaiciusSeimoje * 200);
+            skaiciavimai.setRealiosMenesinesPajamos(skaiciavimai.getSeimosPajamosAtskaiciusMokescius() - skaiciavimai.getSeimosFinansiniaiIsipareigojimai() - (skaiciavimai.getVaikuSkaiciusSeimoje() * 200));
         
-           if (kreditoMenesineImokaApskaiciavimas >= realiosMenesinesPajamos / 100 * 40 ){
+           if (skaiciavimai.paskolos_suteikimas()){
                   galimybeGrazintiKreditaNustatymuiTextField.setText("Bankas nesuteikia kredito");
                   kreditoMenesineImokaTextField.setText("");
                   bendrosGrazintinosSUmosApskaiciavimasTextField.setText("");
@@ -522,8 +506,8 @@ public class NewJFrame extends javax.swing.JFrame {
            }else{
                
                  galimybeGrazintiKreditaNustatymuiTextField.setText("Bankas suteikia kredita");
-                 kreditoMenesineImokaTextField.setText(kreditoMenesineImokaApskaiciavimas + ""); 
-                 bendrosGrazintinosSUmosApskaiciavimasTextField.setText(bendrosGrazintinosSumosApskaiciavimasAtsakymas + "");
+                 kreditoMenesineImokaTextField.setText(skaiciavimai.getKreditoMenesineImokaApskaiciavimas() + ""); 
+                 bendrosGrazintinosSUmosApskaiciavimasTextField.setText(skaiciavimai.getBendrosGrazintinosSumosApskaiciavimasAtsakymas() + "");
              }  
        
            // PABAIGA!!!!!!!!!!!!!!  GALIMYBE GRAZINTI KREDITA NUSTATYMUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \\                        
