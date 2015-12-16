@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+/*
+Naudojamas CONSOLIDATE CONDITIONAL
+EXPRESSION - kelias if salygas pakeiciau i viena
+*/
 package praktinistrys;
 
 /**
