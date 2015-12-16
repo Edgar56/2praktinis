@@ -1,14 +1,16 @@
 package kreditas;
 
-public class vkreditas {
+public class vkreditas extends Kreditai { //paveldziu super klase
 	private double a, k, l, is;
-	
-	public void setDuom(double a, double k, double l, double is){
-		this.a=a;
-		this.k=k;
-		this.l=l;
-		this.is=is;
-	}
+
+    public vkreditas(double a, double k, double l, double is) {
+        super(a, k, l, is);
+    }
+	//Default Constructor
+    public vkreditas()
+    {
+        super(0,0,0,0);
+    }
 	
 	public void kreditas(){
 		
@@ -20,13 +22,13 @@ public class vkreditas {
 				{		Ksum=kreditosuma(k,l);
 						Vimk=imokosAp(Ksum, l);
 						if(((Vimk/a)*100)<=40)
-							System.out.println("Kredità suteikti galima!" + " "
-									+ "Viso graþinti reikës: " + Ksum + " " 
-									+ "Menësine ámoka bus: " + Vimk);
+							System.out.println("Kreditï¿½ suteikti galima!" + " "
+									+ "Viso graï¿½inti reikï¿½s: " + Ksum + " " 
+									+ "Menï¿½sine ï¿½moka bus: " + Vimk);
 							else System.out.println("Kredito suteikti negalime! ");}
 						else System.out.println("Kredito suteikti negalime! Perilgas terminas!");
-				else System.out.println("Kredito suteikti negalime! Praðoma suma yra permaþa arba per didelë!");
-		else System.out.println("Kredito suteikti negalime! Jusu ásiskolinimai per dideli");	
+				else System.out.println("Kredito suteikti negalime! Praï¿½oma suma yra permaï¿½a arba per didelï¿½!");
+		else System.out.println("Kredito suteikti negalime! Jusu ï¿½siskolinimai per dideli");	
 		
 	}
 	private double kreditosuma(double k, double l){
