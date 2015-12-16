@@ -100,6 +100,18 @@ public class Skaiciavimai {
     public void setVaikuSkaiciusSeimoje(double vaikuSkaiciusSeimoje) {
         this.vaikuSkaiciusSeimoje = vaikuSkaiciusSeimoje;
     }
+    public boolean tikrinti_duomenys()
+    {
+        return vaikuSkaiciusSeimoje > 0 && vaikuSkaiciusSeimoje < 10 && seimosPajamosAtskaiciusMokescius > 0 && seimosPajamosAtskaiciusMokescius < 30000 && seimosFinansiniaiIsipareigojimai > 0 && seimosFinansiniaiIsipareigojimai < 15000 && laikotarpis < 40;
+    }
     
+    public boolean tikrinti_laikotarpi (int x)
+    {
+       return laikotarpis  > x;
+    }
+    public boolean paskolos_suteikimas()
+    {
+        return kreditoMenesineImokaApskaiciavimas >= realiosMenesinesPajamos / 100 * 40;
+    }
     
 }
